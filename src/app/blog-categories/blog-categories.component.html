@@ -1,0 +1,19 @@
+<section class="todoapp">
+    <header class="header">
+      <h1>Blog Categories</h1>
+    </header>
+    <section class="main">
+      <ul class="todo-list">
+        <li *ngFor="let category of categories">
+          <div class="view">
+            <input class="toggle" type="checkbox">
+            <label>{{ category.name }}</label>
+            <button class="destroy" value="Destroy">Delete</button>
+           </div>
+        </li>
+      </ul>
+    </section>
+    <footer class="footer">
+      <span class="todo-count"></span>
+    </footer>
+</section>
