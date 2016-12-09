@@ -5,15 +5,14 @@
     <section class="main">
       <ul class="todo-list">
         <li *ngFor="let category of categories">
-          <div class="view">
-            <input class="toggle" type="checkbox">
+          <div class="view" [class.selected]="category.selected">
+            <input class="toggle" type="checkbox" (click)="updateCategory(category)" [checked]="category.selected">
             <label>{{ category.name }}</label>
-            <button class="destroy" value="Destroy">Delete</button>
            </div>
         </li>
       </ul>
     </section>
     <footer class="footer">
-      <span class="todo-count"></span>
+      <span class="todo-count selected-blog-category" *ngIf="selectedCategory !== ''">Selected Category : {{selectedCategory.name}}</span>
     </footer>
 </section>

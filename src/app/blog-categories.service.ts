@@ -5,13 +5,21 @@ import { Categories } from './categories';
 import { Observable } from 'rxjs/observable'; // using this you have to explicitly import observable operators
 //import { Observable } from 'rxjs/Rx'; // it will import all the data
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch'; 
+import 'rxjs/add/operator/catch';
+
+/**
+ * @description To Import Lodash Library
+ */
+import * as _ from "lodash";  
 
 @Injectable()
 export class BlogCategoriesService {
   private categoriesUrl = './app/categories.json'; // Url to get blog categories 
   
-  constructor (private http: Http) { }
+  public allCategories: Categories[] = [];
+
+  constructor (private http: Http) {
+  }
   
   getAllCategories (): Observable<Categories[]> {
       return this.http.get(this.categoriesUrl)
@@ -38,5 +46,34 @@ export class BlogCategoriesService {
     return Observable.throw(errMsg);  
   }
 
-}
+  updateCategory (category: Categories): Promise<Categories> {
+    let categoryId = category.id;
+    let updatedData = {
+      selected: !category.selected
+    }
+    
+    let getCategoryById = this.getCategoryById(categoryId);
+    if(getCategoryById){
+      Object.assign(getCategoryById, updatedData);  
+    }
+    return Promise.resolve(getCategoryById);
+  }
+  
+  resetSelectedCategories (): Categories [] {
+    let blogCategories = this.allCategories;
 
+    _.forEach(blogCategories, function(category){
+        category.selected = false; 
+    })
+    return blogCategories; 
+  }
+
+  getCategoryById (id: number): any {
+    
+    let blogCategories = this.resetSelectedCategories();
+    return blogCategories
+        .filter(category => category.id === id)
+        .pop();
+  }
+
+}
