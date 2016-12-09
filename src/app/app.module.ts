@@ -17,12 +17,14 @@ import { BlogCategoriesComponent } from './blog-categories/blog-categories.compo
 /**
  * @description To Import Lodash Library
  */
-import * as _ from "lodash";  
+import * as _ from "lodash";
+import { PostsComponent } from './posts/posts.component';  
 
 @NgModule({
   declarations: [
     AppComponent,
-    BlogCategoriesComponent
+    BlogCategoriesComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
