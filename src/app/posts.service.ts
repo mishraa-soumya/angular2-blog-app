@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+
 //import { Http, Response, URLSearchParams } from '@angular/http';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 /* import observable and rxjs operators */
-import { Observable } from 'rxjs/observable';
-import '../rxjs-operators';
+import { Observable } from 'rxjs/observable'; // using this you have to explicitly import observable operators
+//import { Observable } from 'rxjs/Rx'; // it will import all the data
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 /* import Post class */
 import { Posts } from './posts';
@@ -16,13 +19,13 @@ export class PostsService {
 
   constructor(private http: Http) { }
 
-  getAllPosts (categoryId: number): Observable<Posts[]>{
+  getAllPosts (): Observable<Posts[]> {
     // let params: URLSearchParams = new URLSearchParams();
     // params.set('category_id', categoryId);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.postsUrl + categoryId , options)
+    return this.http.get(this.postsUrl , options)
                 .map(this.extractData)
                 .catch(this.handleError);
   }

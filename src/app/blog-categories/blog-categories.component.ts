@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Categories } from '../categories';
 import { BlogCategoriesService } from '../blog-categories.service';
 import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
+import {PostsComponent} from "../posts/posts.component";
 
 // Add the RxJS Observable operators.
 import '../rxjs-operators';
@@ -45,7 +46,7 @@ export class BlogCategoriesComponent implements OnInit {
   /**
    * update the property of the category
    */
-  updateCategory (category): void {
+   updateCategory (category): void {
     this.blogCategoryService.updateCategory(category)
         .then(
           data => {
@@ -57,5 +58,5 @@ export class BlogCategoriesComponent implements OnInit {
             return Observable.throw(error);
           }
         )     
-  }
+    }
 }

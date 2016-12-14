@@ -5,7 +5,7 @@
     <section class="main">
       <ul class="todo-list">
         <li *ngFor="let category of categories">
-          <div class="view" [class.selected]="category.selected">
+          <div class="view" [class.selected]="category.selected === selectedCategory">
             <input class="toggle" type="checkbox" (click)="updateCategory(category)" [checked]="category.selected">
             <label>{{ category.name }}</label>
            </div>
@@ -13,6 +13,7 @@
       </ul>
     </section>
     <footer class="footer">
-      <span class="todo-count selected-blog-category" *ngIf="selectedCategory !== ''">Selected Category : {{selectedCategory.name}}</span>
+      <span class="todo-count selected-blog-category" *ngIf="selectedCategory !== ''">Selected Category : {{ selectedCategory.name }}</span>
     </footer>
 </section>
+<blog-posts [category]="selectedCategory"></blog-posts>
